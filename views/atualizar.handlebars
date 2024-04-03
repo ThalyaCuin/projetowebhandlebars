@@ -1,0 +1,64 @@
+<div class="container">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-primary mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SISTEMA WEB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Cadastrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consultar">Consultar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <p class="fs-5">Cadastrar - Agendamento de Potencial Clientes</p>
+    <p class="fs-6">Sistema Utilizado para agendamento de serviços.</p>
+    {{#if agendamento}}
+        <form class="row g-3" method="POST" action="/editar/{{agendamento.id}}">
+            <h5 class="fw-bold">Atualizar dados de Cadastro</h5>
+            <div class="col-md-12">
+                <label class="form-label" for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" value="{{agendamento.nome}}">
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" for="telefone">Telefone</label>
+                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite seu telefone" value="{{agendamento.telefone}}">
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" for="origem">Origem</label>
+                <select class="form-select" id="origem" name="origem">
+                    <option selected>Escolha...</option>
+                    <option value="celular">Celular</option>
+                    <option value="fixo">Fixo</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.getElementById("origem").value = "{{agendamento.origem}}";
+                });
+            </script>
+            <div class="col-md-12">
+                <label class="form-label" for="dataContato">Data do Contato</label>
+                <input type="date" class="form-control" id="dataContato" name="dataContato" value="{{agendamento.data_contato}}">
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" for="observacoes">Observações</label>
+                <textarea class="form-control" id="observacoes" name="observacoes" rows="3" placeholder="Adicione quaisquer observações adicionais aqui">{{agendamento.observacoes}}</textarea>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </div>
+        </form>
+    {{else}}
+        <p>Agendamento não encontrado.</p>
+    {{/if}}
+</div>
